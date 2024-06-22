@@ -1,0 +1,23 @@
+<launch>
+    <param name="use_sim_time" value="true" />
+
+    <param name="map_path" type="string" value="/root/catkin_ws/src/localization/data/pcd_tiles_filtered/" />
+    <param name="save_path" type="string" value="/root/catkin_ws/src/localization/result/result_bonus_v2.csv" />
+
+    <node pkg="localization" type="visualization" name="visualization_node" output="screen"/>
+    <node pkg="localization" type="radar" name="radar_subscriber" output="screen"/>
+    
+    <node pkg="rviz" type="rviz" name="display_result" output="screen" args="-d /root/catkin_ws/src/localization/config/visualization.rviz" />
+    
+    <arg name="bags" default="
+        /root/catkin_ws/src/localization/data/bonus.bag
+    "/>
+
+    <node pkg="rosbag" type="play" name="bag_player" required="true" output="screen"
+        args="
+        --clock
+        --pause
+        --bags $(arg bags)
+        -k
+    "/>
+</launch>

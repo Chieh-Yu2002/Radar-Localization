@@ -1,0 +1,9 @@
+<launch>
+    <param name="use_sim_time" value="true" />
+
+    <param name="map_source_path" type="string" value="/root/catkin_ws/src/localization/data/pcd_tiles_z0/" />
+    <param name="map_save_path" type="string" value="/root/catkin_ws/src/localization/data/pcd_tiles_filtered/" />
+
+    <node pkg="localization" type="map_modified" name="map_modifier" output="screen"/>
+    <node pkg="rviz" type="rviz" name="display_result" output="screen" args="-d /root/catkin_ws/src/localization/config/map_modified.rviz" />
+</launch>
